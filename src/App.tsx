@@ -20,7 +20,6 @@ import { useCallback, useEffect, useState } from "react";
 function App() {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<IProducts[]>([]);
-  const [duties, setDuties] = useState<IDuties[]>([]);
   const [pendents, setPendents] = useState<IDuties[]>([]);
   const [buyer, setBuyer] = useState<IBuyer>();
 
@@ -53,7 +52,6 @@ function App() {
 
   const loadDuties = async () => {
     const response = await getDuties();
-    setDuties(response.data);
     handlePending(response.data);
   };
 
