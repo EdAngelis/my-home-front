@@ -1,0 +1,14 @@
+.cart {
+    width: 100%;
+    height: 100%;
+    background: red;
+  }
+
+  .cart-foot {
+    padding: 20px;
+    justify-content: space-between;
+  }
+
+  .table {
+    border: solid 1px black;
+  }
