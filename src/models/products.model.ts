@@ -1,4 +1,5 @@
 interface IProducts extends Document {
+  _id: string;
   cod: string;
   name: string;
   unit: string;
