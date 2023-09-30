@@ -1,9 +1,54 @@
-.products {
-    width: 100%;
-    height: 100%;
-    background: green;
-  }
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  gap: 0.4rem;
+}
 
-  .table {
-    border: solid 1px black;
-  }
+.top {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.top button {
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.filter {
+  justify-self: center;
+}
+.row { 
+  display: flex;
+  gap: 1rem;
+}
+
+.row div {
+  display: grid;
+  background-color: white;
+  border-radius: 3%;
+  grid-template-columns: 1fr 1fr;
+  flex-grow: 2;
+}
+
+.product {
+  grid-column: span 2;
+  padding: 3px 10px;
+}
+
+.badge {
+  padding: 3px 10px;
+}
+
+.price {
+  justify-self: end;
+  padding: 3px 10px;
+}
+
+
+
+
+
+
