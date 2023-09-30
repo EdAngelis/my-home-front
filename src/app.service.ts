@@ -1,6 +1,7 @@
 import api from "./service/api";
 import IBuyer from "./models/buyer.model";
 import IDuties from "./models/duties.model";
+import IProduct from "./models/products.model";
 
 const getProducts = async () => {
   const response = await api.get("/products");
@@ -17,6 +18,11 @@ const getBuyer = async () => {
   return response.data.data[0];
 };
 
+const deleteProduct = async (id: string) => {
+  const response = await api.delete(`/products/${id}`);
+  return response.data;
+}
+
 const updateCart = async (buyer: IBuyer) => {
   const response = await api.patch(`/buyers/${buyer._id}`, buyer);
   return response.data.data;
@@ -26,6 +32,11 @@ const updateDuty = async (duty: IDuties) => {
   const response = await api.patch(`/duties/${duty._id}`, duty);
   return response.data.data;
 };
+
+const createProduct = async ( product: IProduct ) => {
+  const response = await api.post(`/products`, product);
+  return response.data.data;
+}
 
 const sendWhatsapp = async (buyer: IBuyer) => {
   const items = buyer?.cart?.items;
@@ -88,4 +99,6 @@ export {
   getDuties,
   updateDuty,
   sendWhatsapp,
+  deleteProduct,
+  createProduct
 };
