@@ -1,0 +1,39 @@
+/* div * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+.dropdown {
+    position: relative;
+    background-color: #ffffff;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    width: 100%;
+    gap: 2px;
+}
+
+.dropdown-content span{
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.open {
+    display: grid;
+    grid-template-columns: 1fr;
+}
