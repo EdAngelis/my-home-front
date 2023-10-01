@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createProduct } from "../../../app.service";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./create_product.css";
 import IProducts from "../../../models/products.model";
@@ -8,7 +8,7 @@ import { Dropdown } from "../../../components";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
-  const { register, handleSubmit, setValue, getValues } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [unitKg, setUnitKg] = useState(false);
 
   const goTo = (path: string) => {
@@ -16,10 +16,9 @@ export default function CreateProduct() {
   };
   const hSubmit = async (data: any) => {
     const newProduct: IProducts = data;
-    console.log(newProduct);
     try {
-      // await createProduct(newProduct);
-      // goTo("/products");
+      await createProduct(newProduct);
+      goTo("/products");
     } catch (error) {
       console.log(error);
     }
