@@ -72,7 +72,7 @@ export default function Products() {
   };
   return (
     <>
-      <div className="container">
+      <div className="container-products">
         <div className="top">
           <img src={homeIcon} alt="home" />
           <button onClick={() => goTo("/create-product")}>NEW PRODUCT</button>
@@ -80,7 +80,11 @@ export default function Products() {
         </div>
 
         <div className="filter">
-          <input type="text" onChange={(event) => handleFilter(event)} />
+          <input
+            placeholder="filter by name"
+            type="text"
+            onChange={(event) => handleFilter(event)}
+          />
         </div>
         {filteredProducts.map((product, index) => (
           <div className="row" key={index}>

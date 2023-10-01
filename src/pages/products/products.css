@@ -1,4 +1,4 @@
-.container {
+.container-products {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
@@ -19,7 +19,9 @@
 
 .filter {
   justify-self: center;
+  margin-bottom: 10px;
 }
+
 .row { 
   display: flex;
   gap: 1rem;
