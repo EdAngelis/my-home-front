@@ -1,14 +1,27 @@
-.cart {
-    width: 100%;
-    height: 100%;
-    background: red;
-  }
 
-  .cart-foot {
-    padding: 20px;
-    justify-content: space-between;
-  }
+.row-cart {
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr 1fr;
+  background-color: #fff;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0 10px 10px;
+}
 
-  .table {
-    border: solid 1px black;
-  }
+
+
+.img {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.img img {
+  justify-self: center;
+}
+
+
