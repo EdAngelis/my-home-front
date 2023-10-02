@@ -50,12 +50,26 @@ export default function Cart() {
     }
   };
 
+  const hCleanCart = async () => {
+    if (buyer?.cart) {
+      buyer.cart.items = [];
+      try {
+        const resp = await updateCart(buyer);
+        setTotal("0.00");
+        await setBuyer(resp);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <>
-      <div className="container">
+      <div className="container-cart">
         <div className="top">
           <span>Total: {total}</span>
           <button
+            className="btn"
             onClick={() => {
               buyer ? sendWhatsapp(buyer) : null;
             }}
@@ -86,6 +100,14 @@ export default function Cart() {
               ))
             : null}
         </div>
+        <button
+          className="btn btn-clean"
+          onClick={() => {
+            hCleanCart();
+          }}
+        >
+          Clean
+        </button>
       </div>
     </>
   );

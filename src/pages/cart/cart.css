@@ -24,4 +24,8 @@
   justify-self: center;
 }
 
-
+.btn-clean {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
