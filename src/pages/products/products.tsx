@@ -13,12 +13,13 @@ import {
 } from "../../app.service";
 import IBuyer from "../../models/buyer.model";
 import "./products.css";
+import { set } from "react-hook-form";
 
 export default function Products() {
   const navigate = useNavigate();
   const [products, setProducts] = useState<IProducts[]>([]);
   const [buyer, setBuyer] = useState<IBuyer>();
-
+  const [alertOn, setAlertOn] = useState<boolean>(false);
   const [filteredProducts, setFilteredProducts] = useState<IProducts[]>([]);
 
   useEffect(() => {
@@ -38,11 +39,21 @@ export default function Products() {
   };
 
   const addItemToCart = async (product: IProducts) => {
+    setAlertOn(true);
+    setTimeout(() => {
+      setAlertOn(false);
+    }, 500);
     if (buyer?.cart) {
+      const hasProductInTheCart = buyer.cart.items.find((item) => {
+        return item.product._id === product._id;
+      });
+
+      if (hasProductInTheCart) return;
+
       buyer.cart.items.push({ product, qt: 1 });
+
       try {
         const resp = await updateCart(buyer);
-        console.log(resp);
         await setBuyer(resp);
       } catch (error) {
         console.log(error);
@@ -70,13 +81,15 @@ export default function Products() {
   const goTo = (path: string) => {
     navigate(path);
   };
+
   return (
     <>
+      <div className={`alert ${alertOn && "trigger-alert"}`}></div>
       <div className="container-products">
         <div className="top">
-          <img src={homeIcon} alt="home" />
-          <button onClick={() => goTo("/create-product")}>NEW PRODUCT</button>
-          <img src={arrowIcon} alt="" onClick={() => goTo("/cart")} />
+          <button className="btn" onClick={() => goTo("/create-product")}>
+            NEW PRODUCT
+          </button>
         </div>
 
         <div className="filter">
@@ -89,6 +102,7 @@ export default function Products() {
         {filteredProducts.map((product, index) => (
           <div className="row" key={index}>
             <img
+              className=""
               src={trashIcon}
               alt="delete"
               onClick={() => deleteProd(product._id)}
@@ -99,6 +113,7 @@ export default function Products() {
               <span className="price">{product.price}</span>
             </div>
             <img
+              className="cart-icon"
               src={cartIcon}
               alt="cart"
               onClick={() => addItemToCart(product)}

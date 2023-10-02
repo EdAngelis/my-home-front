@@ -49,6 +49,32 @@
   padding: 3px 10px;
 }
 
+@keyframes alert {
+  0% {
+    top: -50px;
+  }
+  50% {
+    top: -20px;
+  }
+  100% {
+    top: -50px;
+  }
+}
+
+.alert {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 50px;
+  right: 0px;
+  top: -50px;
+  background-color: #00f054;
+}
+
+.trigger-alert {
+  animation-name: alert;
+  animation-duration: 0.7s;
+}
 
 
 
