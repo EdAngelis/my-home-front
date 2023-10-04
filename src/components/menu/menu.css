@@ -20,3 +20,18 @@
     color: #ffffff;
     
 }
+
+.li-cart {
+    position: relative;
+}
+
+.badge-cart {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
