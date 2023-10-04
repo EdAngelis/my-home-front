@@ -1,14 +1,17 @@
-import { BrowserRouter } from 'react-router-dom';
-import Menu from './components/menu/menu';
-import Routes from './routes';
+import { BrowserRouter } from "react-router-dom";
+import { AppProvider } from "./context";
+import Menu from "./components/menu/menu";
+import Routes from "./routes";
 
-function App(){
-    return (
-        <BrowserRouter>
-            <Menu />
-            <Routes />
-        </BrowserRouter>
-    );
+function App() {
+  return (
+    <AppProvider>
+      <BrowserRouter>
+        <Menu />
+        <Routes />
+      </BrowserRouter>
+    </AppProvider>
+  );
 }
 
 export default App;
