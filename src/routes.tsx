@@ -4,6 +4,7 @@ import Products from "./pages/products/products";
 import Cart from "./pages/cart/cart";
 import Duties from "./pages/duties/duties";
 import CreateProduct from "./pages/products/create/create_product";
+import Home from "./pages/home/home";
 export interface RouteObject {
   caseSensitive?: boolean;
   children?: RouteObject[];
@@ -13,8 +14,12 @@ export interface RouteObject {
 }
 const routes = [
   {
-    path: "/products",
+    path: "/",
     index: true,
+    element: <Home />,
+  },
+  {
+    path: "/products",
     element: <Products />,
   },
   {
