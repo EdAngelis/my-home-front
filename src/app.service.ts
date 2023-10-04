@@ -13,8 +13,8 @@ const getDuties = async () => {
   return response.data;
 };
 
-const getBuyer = async () => {
-  const response = await api.get("/buyers");
+const getBuyer = async (pin: string) => {
+  const response = await api.get(`/buyers/${pin}`);
   return response.data.data[0];
 };
 
