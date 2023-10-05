@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { cpfValidator } from "../../components/validators";
 import { getBuyerByCpf, createBuyer } from "../../app.service";
 import { AppContext } from "../../context";
@@ -12,6 +12,10 @@ export default function Home() {
   let { userId, setUserId } = useContext(AppContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUserId("");
+  });
 
   const hLogin = async (event: any) => {
     const cpf: string = event.target.value;
@@ -29,7 +33,7 @@ export default function Home() {
         } else {
           setUserId(resp.data._id);
         }
-        userId !== "" && navigate("/products");
+        navigate("/products");
       } catch (error) {
         console.log(error);
       }
@@ -39,18 +43,20 @@ export default function Home() {
   return (
     <>
       <div className="container-home">
-        <div className="login-input">
-          <label htmlFor="cpf">{userId !== "" ? userId : "LOGIN"}</label>
-          <input
-            onChange={hLogin}
-            value={cpf}
-            placeholder="CPF"
-            type="number"
-            name="cpf"
-            id="cpf"
-          />
-          <span>Caso o cpf nao exista uma nova conta será criada</span>
-        </div>
+        {userId === "" && (
+          <div className="login-input">
+            <label htmlFor="cpf">"LOGIN"</label>
+            <input
+              onChange={hLogin}
+              value={cpf}
+              placeholder="CPF"
+              type="number"
+              name="cpf"
+              id="cpf"
+            />
+            <span>Caso o cpf nao exista uma nova conta será criada</span>
+          </div>
+        )}
       </div>
     </>
   );

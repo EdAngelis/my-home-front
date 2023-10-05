@@ -60,6 +60,8 @@ export default function Cart() {
       buyer.cart.items = [];
       try {
         const resp = await updateCart(buyer);
+        const qtItems = resp.cart?.items?.length || 0;
+        setQtItemCart(qtItems);
         setTotal("0.00");
         await setBuyer(resp);
       } catch (error) {

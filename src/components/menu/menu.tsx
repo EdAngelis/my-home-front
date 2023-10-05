@@ -1,15 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AppContext } from "../../context";
 import "./menu.css";
 
 export default function Menu() {
-  const { qtItemCart } = useContext(AppContext);
+  const { qtItemCart, userId } = useContext(AppContext);
+  const [tabName, setTabName] = useState("Home");
+
+  useEffect(() => {
+    userId === "" ? setTabName("Home") : setTabName("Logout");
+  }, [userId]);
   return (
     <div>
       <nav className="nav-bar">
         <Link className="li" to="">
-          Home
+          {tabName}
         </Link>
         <Link className="li" to="products">
           Products
