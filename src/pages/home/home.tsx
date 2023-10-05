@@ -1,16 +1,38 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { cpfValidator } from "../../components/validators";
+import { getBuyerByCpf, createBuyer } from "../../app.service";
+import { AppContext } from "../../context";
 
 import "./home.css";
-import { getBuyer } from "../../app.service";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const [pin, setPin] = useState("");
+  const [cpf, setCpf] = useState("");
 
-  const hLogin = (event: any) => {
-    const pinEvent = event.target.value;
-    if (pinEvent.length <= 6) {
-      setPin(pinEvent);
-      if (pinEvent.length === 6) getBuyer(pinEvent);
+  let { userId, setUserId } = useContext(AppContext);
+
+  const navigate = useNavigate();
+
+  const hLogin = async (event: any) => {
+    const cpf: string = event.target.value;
+    setCpf(cpf);
+    if (cpfValidator(cpf)) {
+      try {
+        const resp = await getBuyerByCpf(cpf);
+        const { message } = resp;
+
+        if (message === "Buyer not found") {
+          const resp = await createBuyer({ cpf });
+          resp.status === 200
+            ? setUserId(resp.data.data._id)
+            : console.log("Show Alerta");
+        } else {
+          setUserId(resp.data._id);
+        }
+        // userId !== "" && navigate("/products");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -18,16 +40,16 @@ export default function Home() {
     <>
       <div className="container-home">
         <div className="login-input">
-          <label htmlFor="pin">Login</label>
+          <label htmlFor="cpf">{userId !== "" ? userId : "LOGIN"}</label>
           <input
             onChange={hLogin}
-            value={pin}
-            placeholder="Pin de 6 digitos"
+            value={cpf}
+            placeholder="CPF"
             type="number"
-            name="pin"
-            id="pin"
+            name="cpf"
+            id="cpf"
           />
-          <span>Caso o pin nao exista uma nova conta será criada</span>
+          <span>Caso o cpf nao exista uma nova conta será criada</span>
         </div>
       </div>
     </>

@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useContext } from "react";
 import IBuyer from "../../models/buyer.model";
 import IProducts from "../../models/products.model";
 import { dim, plus } from "../../assets/icons/icons";
+import { AppContext } from "../../context";
 import "./cart.css";
 
 import { getBuyer, updateCart, sendWhatsapp } from "../../app.service";
@@ -10,12 +11,14 @@ export default function Cart() {
   const [buyer, setBuyer] = useState<IBuyer>();
   const [total, setTotal] = useState<string>("0.00");
 
+  const { userId, setQtItemCart } = useContext(AppContext);
+
   useEffect(() => {
     loadBuyer();
   }, []);
 
   const loadBuyer = async () => {
-    const response = await getBuyer();
+    const response = await getBuyer(userId);
     await setBuyer(response);
   };
 
@@ -44,6 +47,8 @@ export default function Cart() {
       try {
         const resp = await updateCart(buyer);
         await setBuyer(resp);
+        const qtItems = resp.cart?.items?.length || 0;
+        setQtItemCart(qtItems);
       } catch (error) {
         console.log(error);
       }
