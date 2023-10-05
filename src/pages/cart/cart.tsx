@@ -6,6 +6,7 @@ import { AppContext } from "../../context";
 import "./cart.css";
 
 import { getBuyer, updateCart, sendWhatsapp } from "../../app.service";
+import InputButton from "../../components/input-button/input-button";
 
 export default function Cart() {
   const [buyer, setBuyer] = useState<IBuyer>();
@@ -44,45 +45,50 @@ export default function Cart() {
         }
         return item.qt > 0;
       });
-      try {
-        const resp = await updateCart(buyer);
-        await setBuyer(resp);
-        const qtItems = resp.cart?.items?.length || 0;
-        setQtItemCart(qtItems);
-      } catch (error) {
-        console.log(error);
-      }
+      await hUpdateBuyer(buyer);
     }
   };
 
   const hCleanCart = async () => {
     if (buyer?.cart) {
       buyer.cart.items = [];
-      try {
-        const resp = await updateCart(buyer);
-        const qtItems = resp.cart?.items?.length || 0;
-        setQtItemCart(qtItems);
-        setTotal("0.00");
-        await setBuyer(resp);
-      } catch (error) {
-        console.log(error);
-      }
+      await hUpdateBuyer(buyer);
+      setTotal("0.00");
+    }
+  };
+
+  const hUpdateBuyer = async (buyer: IBuyer) => {
+    if (!buyer) return;
+    try {
+      const resp = await updateCart(buyer!);
+      const qtItems = resp.cart?.items?.length || 0;
+      setQtItemCart(qtItems);
+      setBuyer(resp);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onPhoneChange = (e: any) => {
+    if (e.length >= 10 && e.length <= 11) {
+      buyer!.marketPhone = e;
+      hUpdateBuyer(buyer!);
     }
   };
 
   return (
     <>
       <div className="container-cart">
-        <div className="top">
+        <div className="top-cart">
           <span>Total: {total}</span>
-          <button
-            className="btn"
-            onClick={() => {
-              buyer ? sendWhatsapp(buyer) : null;
-            }}
-          >
-            Send Order
-          </button>
+          <InputButton
+            type="number"
+            label="Send"
+            value="Send Order"
+            onClick={() => (buyer ? sendWhatsapp(buyer) : null)}
+            onInputChange={(e) => onPhoneChange(e)}
+          />
         </div>
         <div className="table-container">
           {buyer?.cart?.items
