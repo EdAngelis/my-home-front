@@ -3,9 +3,15 @@ import IBuyer from "./models/buyer.model";
 import IDuties from "./models/duties.model";
 import IProduct from "./models/products.model";
 
+const createBuyer = async (buyer: IBuyer) => {
+
+  const response = await api.post("/buyers", buyer);
+  return response;
+}
+
 const getProducts = async () => {
   const response = await api.get("/products");
-  return response.data;
+  return response.data.data;
 };
 
 const getDuties = async () => {
@@ -13,9 +19,14 @@ const getDuties = async () => {
   return response.data;
 };
 
-const getBuyer = async (pin: string) => {
-  const response = await api.get(`/buyers/${pin}`);
-  return response.data.data[0];
+const getBuyerByCpf = async (cpf: string) => {
+  const response = await api.get(`/buyers/signIn?cpf=${cpf}`);
+  return response.data;
+};
+
+const getBuyer = async (id: string) => {
+  const response = await api.get(`/buyers/${id}`);
+  return response.data.data;
 };
 
 const deleteProduct = async (id: string) => {
@@ -100,5 +111,7 @@ export {
   updateDuty,
   sendWhatsapp,
   deleteProduct,
-  createProduct
+  createProduct,
+  createBuyer,
+  getBuyerByCpf
 };
