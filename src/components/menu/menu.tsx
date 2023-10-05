@@ -18,9 +18,9 @@ export default function Menu() {
           <div className="badge-cart">{qtItemCart}</div>
           <Link to="cart">Cart</Link>
         </div>
-        <Link className="li" to="duties">
+        {/* <Link className="li" to="duties">
           Duties
-        </Link>
+        </Link> */}
       </nav>
       <Outlet />
     </div>
