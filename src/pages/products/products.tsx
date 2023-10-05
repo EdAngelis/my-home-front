@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../../context";
 import { useNavigate } from "react-router-dom";
 import trashIcon from "../../assets/icons/trash-icon.svg";
 import cartIcon from "../../assets/icons/cart-icon.svg";
-import homeIcon from "../../assets/icons/home-icon.svg";
 import IProducts from "../../models/products.model";
-import arrowIcon from "../../assets/icons/arrow-icon.png";
 import {
   getProducts,
   getBuyer,
@@ -13,28 +12,30 @@ import {
 } from "../../app.service";
 import IBuyer from "../../models/buyer.model";
 import "./products.css";
-import { set } from "react-hook-form";
 
 export default function Products() {
   const navigate = useNavigate();
   const [products, setProducts] = useState<IProducts[]>([]);
   const [buyer, setBuyer] = useState<IBuyer>();
   const [alertOn, setAlertOn] = useState<boolean>(false);
-  const [filteredProducts, setFilteredProducts] = useState<IProducts[]>([]);
 
+  const [filteredProducts, setFilteredProducts] = useState<IProducts[]>([]);
+  const { userId, setQtItemCart } = useContext(AppContext);
   useEffect(() => {
     loadProducts();
-    loadBuyer();
+    userId !== "" && loadBuyer();
   }, []);
 
   const loadProducts = async () => {
     const response = await getProducts();
-    setProducts(response.data);
-    setFilteredProducts(response.data);
+    setProducts(response);
+    setFilteredProducts(response);
   };
 
   const loadBuyer = async () => {
-    const response = await getBuyer();
+    const response = await getBuyer(userId);
+    const qtItems = response?.cart?.items?.length || 0;
+    setQtItemCart(qtItems);
     await setBuyer(response);
   };
 
@@ -54,6 +55,8 @@ export default function Products() {
 
       try {
         const resp = await updateCart(buyer);
+        const qtItems = resp.cart?.items?.length || 0;
+        setQtItemCart(qtItems);
         await setBuyer(resp);
       } catch (error) {
         console.log(error);

@@ -1,5 +1,6 @@
-interface IProducts extends Document {
+interface IProducts {
   _id: string;
+  createdByUserId: string;
   cod: string;
   name: string;
   unit: string;
