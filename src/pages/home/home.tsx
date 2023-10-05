@@ -4,14 +4,11 @@ import { getBuyerByCpf, createBuyer } from "../../app.service";
 import { AppContext } from "../../context";
 
 import "./home.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [cpf, setCpf] = useState("");
 
   let { userId, setUserId } = useContext(AppContext);
-
-  const navigate = useNavigate();
 
   const hLogin = async (event: any) => {
     const cpf: string = event.target.value;
