@@ -21,10 +21,7 @@ type Cart = {
 interface IBuyer {
   _id?: string;
   cpf: string;
-  name?: string;
-  email?: string;
-  password?: string;
-  personalInfo?: PersonalInfo;
+  marketPhone: string,
   cart?: Cart;
 }
 
