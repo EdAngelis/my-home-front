@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    height: 50px;
+}
+
+.container input {
+    flex-grow: 2;
+    max-width: 120px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    /* remove arrows input type number */
+    
+    
+}
+
+.container input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+.container button {
+    flex-grow: 1;
+    border-radius: 0 5px 5px 0;
+    border: 1.3px solid #ccc;
+}
