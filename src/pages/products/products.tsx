@@ -12,6 +12,7 @@ import {
 } from "../../app.service";
 import IBuyer from "../../models/buyer.model";
 import "./products.css";
+import Alert from "../../components/alert/alert";
 
 export default function Products() {
   const navigate = useNavigate();
@@ -41,9 +42,7 @@ export default function Products() {
 
   const addItemToCart = async (product: IProducts) => {
     setAlertOn(true);
-    setTimeout(() => {
-      setAlertOn(false);
-    }, 500);
+
     if (buyer?.cart) {
       const hasProductInTheCart = buyer.cart.items.find((item) => {
         return item.product._id === product._id;
@@ -87,7 +86,7 @@ export default function Products() {
 
   return (
     <>
-      <div className={`alert ${alertOn && "trigger-alert"}`}></div>
+      <Alert alertOn={alertOn} setAlertOn={setAlertOn} />
       <div className="container-products">
         <div className="top">
           <button className="btn" onClick={() => goTo("/create-product")}>
@@ -104,13 +103,16 @@ export default function Products() {
         </div>
         {filteredProducts.map((product, index) => (
           <div className="row" key={index}>
-            <img
-              className=""
-              src={trashIcon}
-              alt="delete"
-              onClick={() => deleteProd(product._id)}
-            />
-            <div>
+            <div className="trash-icon-div">
+              {product.createdByUserId === userId && (
+                <img
+                  src={trashIcon}
+                  alt="delete"
+                  onClick={() => deleteProd(product._id)}
+                />
+              )}
+            </div>
+            <div className="card-product">
               <span className="product">{product.name}</span>
               <span className="badge">{product.badge}</span>
               <span className="price">{product.price}</span>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../../../context";
 import { createProduct } from "../../../app.service";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import IProducts from "../../../models/products.model";
 import { Dropdown } from "../../../components";
 
 export default function CreateProduct() {
+  const { userId } = useContext(AppContext);
   const navigate = useNavigate();
   const { register, handleSubmit, setValue } = useForm();
   const [unitKg, setUnitKg] = useState(false);
@@ -16,6 +18,7 @@ export default function CreateProduct() {
   };
   const hSubmit = async (data: any) => {
     const newProduct: IProducts = data;
+    newProduct.createdByUserId = userId;
     try {
       await createProduct(newProduct);
       goTo("/products");
@@ -54,10 +57,10 @@ export default function CreateProduct() {
       <div className="dropdown">
         <Dropdown
           hSelection={hSelection}
-          title="Unidade de Quantidade"
+          title="Unidade de Medida"
           options={[
-            { label: "Kg", value: "Kg" },
-            { label: "Unidade", value: "Un" },
+            { label: "Kg", value: "kg" },
+            { label: "Unidade", value: "un" },
           ]}
         />
       </div>
