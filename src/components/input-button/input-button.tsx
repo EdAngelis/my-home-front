@@ -6,6 +6,7 @@ type Props = {
   value: string;
   onClick: () => void;
   onInputChange: (value: any) => void;
+  placeholder?: string;
 };
 
 export default function InputButton({
@@ -13,6 +14,7 @@ export default function InputButton({
   onClick,
   type = "text",
   onInputChange,
+  placeholder,
 }: Props) {
   const onChange = (event: any) => {
     onInputChange(event.target.value);
@@ -20,7 +22,12 @@ export default function InputButton({
 
   return (
     <div className={styles.container}>
-      <input className={styles.input} type={type} onChange={onChange} />
+      <input
+        className={styles.input}
+        type={type}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
       <button className={styles.button} onClick={onClick}>
         {label}
       </button>
