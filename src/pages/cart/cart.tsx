@@ -7,10 +7,12 @@ import "./cart.css";
 
 import { getBuyer, updateCart, sendWhatsapp } from "../../app.service";
 import InputButton from "../../components/input-button/input-button";
+import Alert from "../../components/alert/alert";
 
 export default function Cart() {
   const [buyer, setBuyer] = useState<IBuyer>();
   const [total, setTotal] = useState<string>("0.00");
+  const [alertOn, setAlertOn] = useState<boolean>(false);
 
   const { userId, setQtItemCart } = useContext(AppContext);
 
@@ -70,15 +72,17 @@ export default function Cart() {
     }
   };
 
-  const onPhoneChange = (e: any) => {
+  const onPhoneChange = async (e: any) => {
     if (e.length >= 10 && e.length <= 11) {
       buyer!.marketPhone = e;
-      hUpdateBuyer(buyer!);
+      await hUpdateBuyer(buyer!);
+      setAlertOn(true);
     }
   };
 
   return (
     <>
+      <Alert alertOn={alertOn} setAlertOn={setAlertOn} />
       <div className="container-cart">
         <div className="top-cart">
           <span>Total: {total}</span>
@@ -88,6 +92,7 @@ export default function Cart() {
             value="Send Order"
             onClick={() => (buyer ? sendWhatsapp(buyer) : null)}
             onInputChange={(e) => onPhoneChange(e)}
+            placeholder={buyer?.marketPhone ? buyer.marketPhone : "Store Phone"}
           />
         </div>
         <div className="table-container">
