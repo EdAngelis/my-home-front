@@ -5,6 +5,7 @@ import { AppContext } from "../../context";
 
 import "./home.css";
 import { useNavigate } from "react-router-dom";
+import IBuyer from "../../models/buyer.model";
 
 export default function Home() {
   const [cpf, setCpf] = useState("");
@@ -26,7 +27,8 @@ export default function Home() {
         const { message } = resp;
 
         if (message === "Buyer not found") {
-          const resp = await createBuyer({ cpf });
+          const newBuyer: IBuyer = { cpf };
+          const resp = await createBuyer(newBuyer);
           resp.status === 200
             ? setUserId(resp.data.data._id)
             : console.log("Show Alerta");
