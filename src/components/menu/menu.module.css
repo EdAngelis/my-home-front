@@ -1,29 +1,26 @@
 .navBar {
     display: flex;
-    background-color: #FFFAF8;
     text-align: center;
     align-items: center;
     gap: 10px;
     margin: 10px 0;
     padding: 10px; 
-    background: #4ECB71; 
+    background-color: #038929; 
     border-radius: 10px
 }
 
 .li {
     text-decoration: none;
-    border-left: 1px solid #FF9A62;
-    border-right: 1px solid #FF9A62;
     flex: 1;
-    color: #FF9A62;
+    color: #FFA979;
     font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+    font-weight: 900;
 }
 
 .li :nth-child(2) {
     text-decoration: none;
-    color: #FF9A62;
-    font-weight: 500;
+    color: #FFA979;
+    font-weight: 900;
 
 }
 
@@ -34,8 +31,6 @@
 
 .liDisabled {
     text-decoration: none;
-    border-left: 1px solid #FF9A62;
-    border-right: 1px solid #FF9A62;
     flex: 1;
     color: #FF9A62;
     font-family: 'Roboto', sans-serif;
