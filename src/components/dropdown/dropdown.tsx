@@ -15,12 +15,7 @@ interface IItem {
   value: string;
 }
 
-export default function Dropdown({
-  title,
-  options,
-  className,
-  hSelection,
-}: Props) {
+export default function Dropdown({ title, options, hSelection }: Props) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<IItem>();
   const [selectedLabel, setSelectedLabel] = useState<string>();
