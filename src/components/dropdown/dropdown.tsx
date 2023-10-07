@@ -1,7 +1,7 @@
 // Custom dropdown component react typescript
 
 import { useEffect, useState } from "react";
-import "./dropdown.css";
+import styles from "./dropdown.module.css";
 
 interface Props {
   className?: string;
@@ -37,11 +37,11 @@ export default function Dropdown({
   };
 
   return (
-    <div className={`dropdown ${className}`}>
-      <div className="dropdown dropdown-title" onClick={() => setOpen(!open)}>
+    <div className={styles.container}>
+      <div className={`${styles.title}`} onClick={() => setOpen(!open)}>
         {selectedLabel || title}
       </div>
-      <div className={`dropdown-content ${open ? "open" : ""}`}>
+      <div className={`${styles.content} ${open ? styles.open : ""}`}>
         {options.map((item, index) => (
           <span
             key={index}
