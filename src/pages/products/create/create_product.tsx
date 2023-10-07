@@ -3,7 +3,7 @@ import { AppContext } from "../../../context";
 import { createProduct } from "../../../app.service";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import "./create_product.css";
+import styles from "./create_product.module.css";
 import IProducts from "../../../models/products.model";
 import { Dropdown } from "../../../components";
 
@@ -37,12 +37,12 @@ export default function CreateProduct() {
   };
 
   return (
-    <form onSubmit={handleSubmit(hSubmit)} className="container-create">
-      <div className="input">
+    <form onSubmit={handleSubmit(hSubmit)} className={styles.container}>
+      <div className={styles.input}>
         <label>Name</label>
         <input {...register("name")} type="text" />
       </div>
-      <div className="input">
+      <div className={styles.input}>
         <label>Marca</label>
         <input
           {...register("badge")}
@@ -50,11 +50,11 @@ export default function CreateProduct() {
           type="text"
         />
       </div>
-      <div className="input">
+      <div className={styles.input}>
         <label>Preço</label>
         <input {...register("price")} placeholder="Ex: 1,99" type="text" />
       </div>
-      <div className="dropdown">
+      <div className={styles.input}>
         <Dropdown
           hSelection={hSelection}
           title="Unidade de Medida"
@@ -65,7 +65,7 @@ export default function CreateProduct() {
         />
       </div>
       {unitKg && (
-        <div className="input">
+        <div className={styles.input}>
           <label>Tamanho</label>
           <input
             {...register("size")}
@@ -74,7 +74,7 @@ export default function CreateProduct() {
           />
         </div>
       )}
-      <div className="buttons">
+      <div className={styles.buttons}>
         <button onClick={() => goTo("/products")}>Cancelar</button>
         <button type="submit">Salvar</button>
       </div>
