@@ -3,7 +3,7 @@ import { cpfValidator } from "../../components/validators";
 import { getBuyerByCpf, createBuyer } from "../../app.service";
 import { AppContext } from "../../context";
 
-import "./home.css";
+import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
 import IBuyer from "../../models/buyer.model";
 
@@ -44,21 +44,22 @@ export default function Home() {
 
   return (
     <>
-      <div className="container-home">
+      <div className={styles.container}>
         {userId === "" && (
-          <div className="login-input">
-            <label htmlFor="cpf">"LOGIN"</label>
+          <div className={styles.loginInput}>
+            <label htmlFor="cpf">LOGIN</label>
             <input
               onChange={hLogin}
               value={cpf}
-              placeholder="CPF"
+              placeholder="USE SEU CPF"
               type="number"
               name="cpf"
               id="cpf"
             />
-            <span>Caso o cpf nao exista uma nova conta será criada</span>
+            <span>Caso o cpf não exista uma nova conta será criada</span>
           </div>
         )}
+        <p>O intuito deste App é o envio de listas de compras pelo WhatsApp</p>
       </div>
     </>
   );

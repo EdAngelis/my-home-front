@@ -7,11 +7,20 @@
     flex-grow: 2;
     max-width: 120px;
     border-radius: 5px 0 0 5px;
-    border: 1px solid #ccc;
+    background-color: #FFF6F1;
+    border: 1px solid #FF9A62;
     text-align: center;
-    /* remove arrows input type number */
-    
-    
+    color: #c15111;
+}
+
+.container input:focus {
+    outline: none;
+    border: 2px solid #FF9A62;
+}
+
+.container input::placeholder {
+    color:    #c15111;
+
 }
 
 .container input[type=number]::-webkit-inner-spin-button,
@@ -23,5 +32,8 @@
 .container button {
     flex-grow: 1;
     border-radius: 0 5px 5px 0;
-    border: 1.3px solid #ccc;
+    background-color: #4ECB71;
+    color: #BDFFD0;
+    cursor: pointer;
+    border: none;
 }

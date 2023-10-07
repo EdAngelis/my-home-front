@@ -3,7 +3,7 @@ import IBuyer from "../../models/buyer.model";
 import IProducts from "../../models/products.model";
 import { dim, plus } from "../../assets/icons/icons";
 import { AppContext } from "../../context";
-import "./cart.css";
+import styles from "./cart.module.css";
 
 import { getBuyer, updateCart, sendWhatsapp } from "../../app.service";
 import InputButton from "../../components/input-button/input-button";
@@ -83,8 +83,8 @@ export default function Cart() {
   return (
     <>
       <Alert alertOn={alertOn} setAlertOn={setAlertOn} />
-      <div className="container-cart">
-        <div className="top-cart">
+      <div className={styles.containerCart}>
+        <div className={styles.topCart}>
           <span>Total: {total}</span>
           <InputButton
             type="number"
@@ -95,14 +95,14 @@ export default function Cart() {
             placeholder={buyer?.marketPhone ? buyer.marketPhone : "Store Phone"}
           />
         </div>
-        <div className="table-container">
+        <div className={styles.containerTable}>
           {buyer?.cart?.items
             ? buyer.cart.items.map((item, index) => (
-                <div className="row-cart" key={index}>
+                <div className={styles.rowCart} key={index}>
                   <span> {item?.product?.name ?? "-"}</span>
                   <div
                     onClick={() => editQuantity(item.product, -1)}
-                    className="img"
+                    className={styles.img}
                   >
                     <img src={dim} alt="" />
                   </div>
@@ -110,7 +110,7 @@ export default function Cart() {
                   <span>{item.qt.toFixed(1)}</span>
                   <div
                     onClick={() => editQuantity(item.product, 1)}
-                    className="img"
+                    className={styles.img}
                   >
                     <img src={plus} alt="" />
                   </div>
@@ -119,12 +119,12 @@ export default function Cart() {
             : null}
         </div>
         <button
-          className="btn btn-clean"
+          className={`${styles.btnClean}`}
           onClick={() => {
             hCleanCart();
           }}
         >
-          Clean
+          Limpar
         </button>
       </div>
     </>

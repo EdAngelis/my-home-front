@@ -1,7 +1,11 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
 
+html {
+  background-color: #FFFAF8;
+}
 
-.btn {
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+body {
+  background-color: #FFFAF8;
 }
