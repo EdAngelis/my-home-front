@@ -2,13 +2,14 @@ import { useState, useContext, useEffect } from "react";
 import { cpfValidator } from "../../components/validators";
 import { getBuyerByCpf, createBuyer } from "../../app.service";
 import { AppContext } from "../../context";
-
+import { Loading } from "../../components";
 import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
 import IBuyer from "../../models/buyer.model";
 
 export default function Home() {
   const [cpf, setCpf] = useState("");
+  const [loading, setLoading] = useState(false);
 
   let { userId, setUserId } = useContext(AppContext);
 
@@ -22,6 +23,7 @@ export default function Home() {
     const cpf: string = event.target.value;
     setCpf(cpf);
     if (cpfValidator(cpf)) {
+      setLoading(true);
       try {
         const resp = await getBuyerByCpf(cpf);
         const { message } = resp;
@@ -38,6 +40,8 @@ export default function Home() {
         navigate("/products");
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -45,20 +49,24 @@ export default function Home() {
   return (
     <>
       <div className={styles.container}>
-        {userId === "" && (
-          <div className={styles.loginInput}>
-            <label htmlFor="cpf">LOGIN</label>
-            <input
-              onChange={hLogin}
-              value={cpf}
-              placeholder="USE SEU CPF"
-              type="number"
-              name="cpf"
-              id="cpf"
-            />
-            <span>Caso o cpf não exista uma nova conta será criada</span>
-          </div>
-        )}
+        <div className={styles.subContainer}>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className={styles.loginInput}>
+              <label htmlFor="cpf">LOGIN</label>
+              <input
+                onChange={hLogin}
+                value={cpf}
+                placeholder="USE SEU CPF"
+                type="number"
+                name="cpf"
+                id="cpf"
+              />
+              <span>Caso o cpf não exista uma nova conta será criada</span>
+            </div>
+          )}
+        </div>
         <p>O intuito deste App é o envio de listas de compras pelo WhatsApp</p>
       </div>
     </>

@@ -2,8 +2,19 @@
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
+    justify-items: center;
     background-color: #FFFAF8;
 }
+
+.subContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    background-color: #FFFAF8;
+    width: auto;
+    height: 200px;
+}
+
 .loginInput {
     display: grid;
     grid-template-columns: 1fr;

@@ -1,3 +1,4 @@
 import Dropdown from "./dropdown/dropdown";
+import Loading from "./loading/loading";
 
-export { Dropdown };
+export { Dropdown, Loading };
