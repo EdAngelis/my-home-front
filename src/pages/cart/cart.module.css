@@ -5,6 +5,10 @@
   gap: 5px 0;
 }
 
+.containerCart {
+  margin-bottom: 50px;
+}
+
 .rowCart {
   display: grid;
   grid-template-columns: 5fr 1fr 1fr 1fr;
