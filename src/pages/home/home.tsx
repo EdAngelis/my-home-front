@@ -11,7 +11,7 @@ export default function Home() {
   const [cpf, setCpf] = useState("");
   const [loading, setLoading] = useState(false);
 
-  let { userId, setUserId } = useContext(AppContext);
+  let { setUserId } = useContext(AppContext);
 
   const navigate = useNavigate();
 
