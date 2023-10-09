@@ -12,6 +12,7 @@ import {
 } from "../../app.service";
 import IBuyer from "../../models/buyer.model";
 import styles from "./products.module.css";
+import { formatPrice } from "../../components/formatters";
 import Alert from "../../components/alert/alert";
 import CheckBox from "../../components/check-box/check-box";
 
@@ -27,7 +28,7 @@ export default function Products() {
 
   useEffect(() => {
     loadProducts();
-    userId !== "" ? loadBuyer() : goTo("/");
+    userId !== "" ? loadBuyer() : goTo("/", null);
   }, []);
 
   const loadProducts = async () => {
@@ -83,8 +84,8 @@ export default function Products() {
     setFilteredProducts(temp);
   };
 
-  const goTo = (path: string) => {
-    navigate(path);
+  const goTo = (path: string, params: any) => {
+    navigate(path, { state: params });
   };
 
   return (
@@ -92,7 +93,9 @@ export default function Products() {
       <Alert alertOn={alertOn} setAlertOn={setAlertOn} />
       <div className={styles.container}>
         <div className={styles.top}>
-          <button onClick={() => goTo("/create-product")}>NOVO PRODUTO</button>
+          <button onClick={() => goTo("/create-product", null)}>
+            NOVO PRODUTO
+          </button>
         </div>
 
         <div className={styles.filter}>
@@ -118,10 +121,15 @@ export default function Products() {
                     )}
                   </div>
                 </div>
-                <div className={styles.cardProduct}>
+                <div
+                  onClick={() => goTo("/create-product", product)}
+                  className={styles.cardProduct}
+                >
                   <span className={styles.product}>{product.name}</span>
                   <span className={styles.badge}>{product.badge}</span>
-                  <span className={styles.price}>{product.price}</span>
+                  <span className={styles.price}>
+                    {formatPrice(product.price)}
+                  </span>
                 </div>
                 <div onClick={() => addItemToCart(product)}>
                   <CartIcon color1="#FF9A62" color2="#D1FFCD" />
@@ -137,10 +145,15 @@ export default function Products() {
                   )}
                 </div>
               </div>
-              <div className={styles.cardProduct}>
+              <div
+                onClick={() => goTo("/create-product", product)}
+                className={styles.cardProduct}
+              >
                 <span className={styles.product}>{product.name}</span>
                 <span className={styles.badge}>{product.badge}</span>
-                <span className={styles.price}>{product.price}</span>
+                <span className={styles.price}>
+                  {formatPrice(product.price)}
+                </span>
               </div>
               <div onClick={() => addItemToCart(product)}>
                 <CartIcon color1="#FF9A62" color2="#D1FFCD" />

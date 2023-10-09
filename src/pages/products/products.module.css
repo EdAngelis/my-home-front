@@ -55,6 +55,7 @@
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
   grid-template-columns: 1fr 1fr;
   flex-grow: 4;
+  cursor: pointer;
 }
 .cartIcon {
   max-width: 30px;
