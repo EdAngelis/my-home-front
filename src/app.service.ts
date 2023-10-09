@@ -103,6 +103,11 @@ const sendWhatsapp = async (buyer: IBuyer) => {
   );
 };
 
+const updateProduct = async (_id: string, product: IProduct) => {
+  const response = await api.patch(`/products/${_id}`, product);
+  return response.data.data;
+};
+
 export {
   getProducts,
   getBuyer,
@@ -113,5 +118,6 @@ export {
   deleteProduct,
   createProduct,
   createBuyer,
-  getBuyerByCpf
+  getBuyerByCpf,
+  updateProduct
 };
