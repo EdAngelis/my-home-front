@@ -66,18 +66,15 @@ export default function Cart() {
       const qtItems = resp.cart?.items?.length || 0;
       setQtItemCart(qtItems);
       setBuyer(resp);
-      console.log(resp);
     } catch (error) {
       console.log(error);
     }
   };
 
   const onPhoneChange = async (e: any) => {
-    if (e.length >= 10 && e.length <= 11) {
-      buyer!.marketPhone = e;
-      await hUpdateBuyer(buyer!);
-      setAlertOn(true);
-    }
+    buyer!.marketPhone = e;
+    await hUpdateBuyer(buyer!);
+    setAlertOn(true);
   };
 
   return (
@@ -90,8 +87,9 @@ export default function Cart() {
             type="number"
             label="Send"
             value="Send Order"
+            description="Digite e tecle enter para salvar o telefone"
             onClick={() => (buyer ? sendWhatsapp(buyer) : null)}
-            onInputChange={(e) => onPhoneChange(e)}
+            onKey={(e) => onPhoneChange(e)}
             placeholder={buyer?.marketPhone ? buyer.marketPhone : "Store Phone"}
           />
         </div>

@@ -1,15 +1,17 @@
 import { useState, useContext, useEffect } from "react";
-import { cpfValidator } from "../../components/validators";
+import { cpfValidator, EmailValidator } from "../../components/validators";
 import { getBuyerByCpf, createBuyer } from "../../app.service";
 import { AppContext } from "../../context";
 import { Loading } from "../../components";
 import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
 import IBuyer from "../../models/buyer.model";
+import { colors } from "@mui/material";
 
 export default function Home() {
   const [cpf, setCpf] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   let { setUserId } = useContext(AppContext);
 
@@ -17,12 +19,11 @@ export default function Home() {
 
   useEffect(() => {
     setUserId("");
-  });
+  }, []);
 
   const hLogin = async (event: any) => {
-    const cpf: string = event.target.value;
-    setCpf(cpf);
-    if (cpfValidator(cpf)) {
+    if (event.key !== "Enter") return;
+    if (cpfValidator(cpf) || EmailValidator(cpf)) {
       setLoading(true);
       try {
         const resp = await getBuyerByCpf(cpf);
@@ -43,6 +44,8 @@ export default function Home() {
       } finally {
         setLoading(false);
       }
+    } else {
+      setError(true);
     }
   };
 
@@ -56,14 +59,22 @@ export default function Home() {
             <div className={styles.loginInput}>
               <label htmlFor="cpf">LOGIN</label>
               <input
-                onChange={hLogin}
+                onChange={(e) => {
+                  setCpf(e.target.value);
+                  setError(false);
+                }}
+                onKeyDown={hLogin}
                 value={cpf}
-                placeholder="USE SEU CPF"
-                type="number"
+                placeholder="Use seu EMAIL ou CPF"
+                type="text"
                 name="cpf"
                 id="cpf"
               />
-              <span>Caso o cpf não exista uma nova conta será criada</span>
+              <div className={styles.error}>
+                {error && <p>E-mail ou CPF inválidos</p>}
+              </div>
+
+              <span>Caso não existam uma nova conta será criada</span>
             </div>
           )}
         </div>

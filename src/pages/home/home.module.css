@@ -64,7 +64,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .loginInput input::placeholder {
     color: #f9ab84;
-    font-size: 1.1rem;
+    font-size: 0.6rem;
 }
 
 .container p {
@@ -78,4 +78,16 @@ input[type=number]::-webkit-outer-spin-button {
 .loginInput input:focus {
     outline: none;
     border: 2px solid #FF9A62;
+}
+
+.error {
+    height: 10px;
+}
+
+.error p {
+    height: 20px;
+    color: red;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 2px;
 }
