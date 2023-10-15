@@ -5,6 +5,8 @@ import Cart from "./pages/cart/cart";
 import Duties from "./pages/duties/duties";
 import CreateProduct from "./pages/products/create/create_product";
 import Home from "./pages/home/home";
+import Cover from "./pages/cover/cover";
+import Menu from "./components/menu/menu";
 export interface RouteObject {
   caseSensitive?: boolean;
   children?: RouteObject[];
@@ -16,23 +18,61 @@ const routes = [
   {
     path: "/",
     index: true,
-    element: <Home />,
+    element: (
+      <>
+        <Menu />
+        <Home />
+      </>
+    ),
+  },
+  {
+    path: "/home",
+    element: (
+      <>
+        <Menu />
+        <Home />
+      </>
+    ),
   },
   {
     path: "/products",
-    element: <Products />,
+    element: (
+      <>
+        <Menu />
+        <Products />
+      </>
+    ),
   },
   {
     path: "/cart",
-    element: <Cart />,
+    element: (
+      <>
+        <Menu />
+        <Cart />
+      </>
+    ),
   },
   {
     path: "/duties",
-    element: <Duties />,
+    element: (
+      <>
+        <Menu />
+        <Duties />
+      </>
+    ),
   },
   {
     path: "/create-product",
-    element: <CreateProduct />,
+    element: (
+      <>
+        <Menu />
+        <CreateProduct />
+      </>
+    ),
+  },
+  {
+    path: "*",
+    element: <h1>404</h1>,
   },
 ];
 
