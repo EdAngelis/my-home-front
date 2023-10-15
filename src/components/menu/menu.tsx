@@ -13,14 +13,14 @@ export default function Menu() {
   return (
     <div className={styles.container}>
       <nav className={styles.navBar}>
-        <Link className={styles.li} to="">
+        <Link className={styles.li} to="/">
           {tabName}
         </Link>
 
         {userId === "" ? (
           <div className={styles.liDisabled}>PRODUTOS</div>
         ) : (
-          <Link className={styles.li} to="products">
+          <Link className={styles.li} to="/products">
             PRODUTOS
           </Link>
         )}
@@ -28,7 +28,7 @@ export default function Menu() {
         {userId === "" ? (
           <div className={styles.liDisabled}>CART</div>
         ) : (
-          <Link className={`${styles.li} ${styles.liCart}`} to="cart">
+          <Link className={`${styles.li} ${styles.liCart}`} to="/cart">
             <div className={styles.badgeContainer}>
               <div className={styles.badge}>{qtItemCart}</div>
               <span>CART</span>
