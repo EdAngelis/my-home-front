@@ -98,7 +98,7 @@ const sendWhatsapp = async (buyer: IBuyer) => {
   }
 
   window.open(
-    `https://api.whatsapp.com/send?phone=55${buyer.marketPhone}&text=${msg}`,
+    `https://api.whatsapp.com/send?phone=${buyer.marketPhone}&text=${msg}`,
     "_blank"
   );
 };
