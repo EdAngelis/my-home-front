@@ -5,7 +5,6 @@ import Cart from "./pages/cart/cart";
 import Duties from "./pages/duties/duties";
 import CreateProduct from "./pages/products/create/create_product";
 import Home from "./pages/home/home";
-import Cover from "./pages/cover/cover";
 import Menu from "./components/menu/menu";
 export interface RouteObject {
   caseSensitive?: boolean;

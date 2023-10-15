@@ -6,7 +6,6 @@ import { Loading } from "../../components";
 import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
 import IBuyer from "../../models/buyer.model";
-import { colors } from "@mui/material";
 
 export default function Home() {
   const [cpf, setCpf] = useState("");
