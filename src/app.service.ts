@@ -91,7 +91,7 @@ const sendWhatsapp = async (buyer: IBuyer) => {
         item.product.name
       }%20%20${item?.product.badge}%20%20${
         item?.product.characteristic || ""
-      }%20%20${item?.product.size || ""}%20%20-%20%20${item.qt}%20%20${
+      }%20%20${item?.product.size || ""}%20%20-%20%20${item.qt.toFixed(2)}%20%20${
         item?.product.unit
       }%0a`;
     }
